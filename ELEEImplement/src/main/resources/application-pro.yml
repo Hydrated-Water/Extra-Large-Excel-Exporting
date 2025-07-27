@@ -1,0 +1,13 @@
+crim:
+  default-database: eele
+
+spring:
+  datasource: # druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/${crim.default-database}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&useCursorFetch=true
+    username: root
+    password: ${secret.database}
+#  jdbc:
+#    template: # 设置超时，单位：s
+#      query-timeout: 5

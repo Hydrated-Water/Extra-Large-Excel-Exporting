@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crim.web.lab.eleeimplement.mapper.LogMapper">
+
+    <select id="count" resultType="int">
+        select count(*)
+        from log
+    </select>
+
+    <select id="excelOrigin" resultType="ExcelBO">
+        select scope.no as scopeNo,
+               scope.name as scopeName,
+               staff.no as staffNo,
+               staff.name as staffName,
+               sub_log.time as logTime,
+               device.no as deviceNo,
+               device.name as deviceName,
+               device_type.name as deviceTypeName,
+               sub_log.comment as comment
+        from sub_log,
+             scope,
+             device,
+             device_type,
+             staff,
+             log
+        where 1
+          and scope.no = sub_log.scope_no
+          and sub_log.device_no = device.no
+          and sub_log.log_id = log.id
+          and log.staff_no = staff.no
+          and device.type_id = device_type.id
+    </select>
+
+    <select id="excelA1" resultType="ExcelBO">
+        select scope.no as scopeNo,
+               scope.name as scopeName,
+               staff.no as staffNo,
+               staff.name as staffName,
+               sub_log.time as logTime,
+               device.no as deviceNo,
+               device.name as deviceName,
+               device_type.name as deviceTypeName
+        from sub_log,
+             scope,
+             device,
+             device_type,
+             staff,
+             log
+        where sub_log.scope_no = scope.no
+          and sub_log.device_no = device.no
+          and sub_log.log_id = log.id
+          and log.staff_no = staff.no
+          and device.type_id = device_type.id;
+    </select>
+
+    <select id="excelC1" resultType="ExcelBO">
+        select scope.no as scopeNo,
+               scope.name as scopeName,
+               staff.no as staffNo,
+               staff.name as staffName,
+               sub_log.time as logTime,
+               device.no as deviceNo,
+               device.name as deviceName,
+               device_type.name as deviceTypeName
+        from sub_log,
+             scope,
+             device,
+             device_type,
+             staff,
+             log
+        where sub_log.scope_no = scope.no
+          and sub_log.device_no = device.no
+          and sub_log.log_id = log.id
+          and log.staff_no = staff.no
+          and device.type_id = device_type.id;
+    </select>
+
+    <select id="excelC1_1" resultType="ExcelBO">
+        select scope.no         as scopeNo,
+               scope.name       as scopeName,
+               staff.no         as staffNo,
+               staff.name       as staffName,
+               sub_log.time     as logTime,
+               device.no        as deviceNo,
+               device.name      as deviceName,
+               device_type.name as deviceTypeName
+        from sub_log,
+             scope,
+             device,
+             device_type,
+             staff,
+             log
+        where sub_log.scope_no = scope.no
+          and sub_log.device_no = device.no
+          and sub_log.log_id = log.id
+          and log.staff_no = staff.no
+          and device.type_id = device_type.id
+          and sub_log.id >= #{startId}
+          and sub_log.id &lt;= #{endId}
+        ORDER BY sub_log.id;
+    </select>
+
+    <select id="excelC1_2" resultType="ExcelBO">
+        select scope.no         as scopeNo,
+               scope.name       as scopeName,
+               staff.no         as staffNo,
+               staff.name       as staffName,
+               sub_log.time     as logTime,
+               device.no        as deviceNo,
+               device.name      as deviceName,
+               device_type.name as deviceTypeName
+        from sub_log,
+             scope,
+             device,
+             device_type,
+             staff,
+             log
+        where sub_log.scope_no = scope.no
+          and sub_log.device_no = device.no
+          and sub_log.log_id = log.id
+          and log.staff_no = staff.no
+          and device.type_id = device_type.id
+          and sub_log.id >= #{startId}
+          and sub_log.id &lt;= #{endId}
+        ORDER BY sub_log.id;
+    </select>
+
+</mapper>

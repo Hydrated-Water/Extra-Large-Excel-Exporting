@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: ELEEImplement
+  profiles:
+    active: pro # need to check
+    include: secret # 密钥文件
+
+
+# JWT 配置
+jwt:
+  # 认证名称
+  header: eleeimplement
+  # 加密字符串
+  secret: ${secret.jwt}
+  # token 过期时间: 168 小时 (7天)
+  expiration: 168
+
+
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  # 自动类型别名扫描
+  type-aliases-package: com.crim.web.lab.eleeimplement.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+#  global-config:
+#    db-config:
+#      id-type: auto
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+  # 自动枚举类扫描
+#  type-enums-package: com....*
+
+
+#logging:
+#  pattern:
+#    #设置日志等级
+#    level: INFO
+#    #设置输出日期格式
+#    dateformat: yyyy年MM月dd日HH:mm:ss
+#  #把日志输出到log/mylog.log文件中，这是相对路径，也可以用绝对路径
+#  file:
+#    name: log/
+logging:
+  level:
+    root: info
+    web: debug
+    com.crim: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
